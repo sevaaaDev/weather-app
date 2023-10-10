@@ -4,6 +4,14 @@ async function getTodayWeather(place) {
   console.log(dataJson);
   displayTodayWeather(dataJson);
 }
+async function getForecastWeather(place) {
+  let dataJson = await fetchWeather(
+    `forecast.json?key=${key}&q=${place}&days=3`,
+  );
+  console.log(dataJson);
+  displayForecastWeather(dataJson);
+}
+
 async function fetchWeather(query) {
   try {
     let response = await fetch(`http://api.weatherapi.com/v1/${query}`);
