@@ -16,3 +16,12 @@ async function fetchWeather(query) {
     console.log(err);
   }
 }
+function displayTodayWeather(data) {
+  console.table({
+    Location: data.location.name,
+    Condition: data.current.condition.text,
+    "Local Time": data.location.localtime,
+    Temperature: `${data.current.temp_c}°C`,
+    Humidity: `${data.current.humidity}%`,
+  });
+}
