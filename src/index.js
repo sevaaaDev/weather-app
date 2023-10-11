@@ -4,6 +4,7 @@ async function getTodayWeather(place) {
   console.log(dataJson);
   displayTodayWeather(dataJson);
 }
+
 async function getForecastWeather(place) {
   let dataJson = await fetchWeather(
     `forecast.json?key=${key}&q=${place}&days=3`,
@@ -16,7 +17,7 @@ async function fetchWeather(query) {
   try {
     let response = await fetch(`http://api.weatherapi.com/v1/${query}`);
     if (!response.ok) {
-      throw Error(response.status);
+      throw new Error(response.statusText);
     }
     let dataJson = await response.json();
     return dataJson;
@@ -24,6 +25,7 @@ async function fetchWeather(query) {
     console.log(err);
   }
 }
+
 function displayTodayWeather(data) {
   console.table({
     Location: data.location.name,
@@ -33,3 +35,29 @@ function displayTodayWeather(data) {
     Humidity: `${data.current.humidity}%`,
   });
 }
+
+function displayForecastWeather(data) {
+  let forecast = data.forecast;
+  let location = data.location;
+  console.table({
+    "Max Temperature": {
+      [forecast.forecastday[0]
+        .date]: `${forecast.forecastday[0].day.maxtemp_c}°C`,
+      [forecast.forecastday[1]
+        .date]: `${forecast.forecastday[1].day.maxtemp_c}°C`,
+      [forecast.forecastday[2]
+        .date]: `${forecast.forecastday[2].day.maxtemp_c}°C`,
+    },
+    "Min Temperature": {
+      [forecast.forecastday[0]
+        .date]: `${forecast.forecastday[0].day.mintemp_c}°C`,
+      [forecast.forecastday[1]
+        .date]: `${forecast.forecastday[1].day.mintemp_c}°C`,
+      [forecast.forecastday[2]
+        .date]: `${forecast.forecastday[2].day.mintemp_c}°C`,
+    },
+  });
+}
+
+getForecastWeather("jakarta");
+getTodayWeather("aksdsf");
