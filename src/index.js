@@ -1,32 +1,35 @@
 const key = "6104b68df4be4b02b7a52853231010";
 async function getTodayWeather(place) {
-  let dataJson = await fetchWeather(`current.json?key=${key}&q=${place}`);
+  const dataJson = await fetchWeather(`current.json?key=${key}&q=${place}`);
+  if (!dataJson) return;
   console.log(dataJson);
-  displayTodayWeather(dataJson);
+  return dataJson;
 }
 
 async function getForecastWeather(place) {
-  let dataJson = await fetchWeather(
+  const dataJson = await fetchWeather(
     `forecast.json?key=${key}&q=${place}&days=3`,
   );
+  if (!dataJson) return;
   console.log(dataJson);
-  displayForecastWeather(dataJson);
+  return dataJson;
 }
 
 async function fetchWeather(query) {
   try {
-    let response = await fetch(`http://api.weatherapi.com/v1/${query}`);
+    const response = await fetch(`http://api.weatherapi.com/v1/${query}`);
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    let dataJson = await response.json();
+    const dataJson = await response.json();
     return dataJson;
   } catch (err) {
     console.log(err);
   }
 }
 
-function displayTodayWeather(data) {
+async function displayTodayWeather(place) {
+  const data = await getTodayWeather(place);
   console.table({
     Location: data.location.name,
     Condition: data.current.condition.text,
@@ -36,7 +39,8 @@ function displayTodayWeather(data) {
   });
 }
 
-function displayForecastWeather(data) {
+async function displayDaysForecastWeather(place) {
+  const data = await getForecastWeather(place);
   let forecast = data.forecast;
   let location = data.location;
   console.table({
@@ -58,6 +62,5 @@ function displayForecastWeather(data) {
     },
   });
 }
-
-getForecastWeather("jakarta");
-getTodayWeather("aksdsf");
+displayDaysForecastWeather("jakarta");
+displayTodayWeather("bandung");
