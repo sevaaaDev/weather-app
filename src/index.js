@@ -1,66 +1,58 @@
-const key = "6104b68df4be4b02b7a52853231010";
-async function getTodayWeather(place) {
-  const dataJson = await fetchWeather(`current.json?key=${key}&q=${place}`);
-  if (!dataJson) return;
-  console.log(dataJson);
-  return dataJson;
-}
-
-async function getForecastWeather(place) {
-  const dataJson = await fetchWeather(
-    `forecast.json?key=${key}&q=${place}&days=3`,
-  );
-  if (!dataJson) return;
-  console.log(dataJson);
-  return dataJson;
-}
-
-async function fetchWeather(query) {
-  try {
-    const response = await fetch(`http://api.weatherapi.com/v1/${query}`);
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    const dataJson = await response.json();
-    return dataJson;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
+import { getWeather } from "./getWeatherData";
 async function displayTodayWeather(place) {
-  const data = await getTodayWeather(place);
+  console.log("Fetching...");
+  const data = await getWeather(place);
+  console.log("Done fetching");
   console.table({
-    Location: data.location.name,
-    Condition: data.current.condition.text,
-    "Local Time": data.location.localtime,
-    Temperature: `${data.current.temp_c}°C`,
-    Humidity: `${data.current.humidity}%`,
+    Location: data.Location,
+    Condition: data.Condition,
+    "Local Time": data["Local Time"],
+    Temperature: data.TemperatureC,
+    Humidity: data.Humidity,
+    ChanceOfRain: data.ChanceOfRain,
   });
 }
 
 async function displayDaysForecastWeather(place) {
-  const data = await getForecastWeather(place);
-  let forecast = data.forecast;
-  let location = data.location;
+  console.log("Fetching...");
+  const data = await getWeather(place);
+  console.log("Done fetching");
   console.table({
     "Max Temperature": {
-      [forecast.forecastday[0]
-        .date]: `${forecast.forecastday[0].day.maxtemp_c}°C`,
-      [forecast.forecastday[1]
-        .date]: `${forecast.forecastday[1].day.maxtemp_c}°C`,
-      [forecast.forecastday[2]
-        .date]: `${forecast.forecastday[2].day.maxtemp_c}°C`,
+      [data.forecastDay[0]]: data.maxTempC[0],
+      [data.forecastDay[1]]: data.maxTempC[1],
+      [data.forecastDay[2]]: data.maxTempC[2],
     },
     "Min Temperature": {
-      [forecast.forecastday[0]
-        .date]: `${forecast.forecastday[0].day.mintemp_c}°C`,
-      [forecast.forecastday[1]
-        .date]: `${forecast.forecastday[1].day.mintemp_c}°C`,
-      [forecast.forecastday[2]
-        .date]: `${forecast.forecastday[2].day.mintemp_c}°C`,
+      [data.forecastDay[0]]: data.minTempC[0],
+      [data.forecastDay[1]]: data.minTempC[1],
+      [data.forecastDay[2]]: data.minTempC[2],
     },
   });
 }
-displayDaysForecastWeather("jakarta");
-displayTodayWeather("bandung");
+
+async function displayHoursForecastWeather(place) {
+  console.log("Fetching...");
+  const data = await getWeather(place);
+  console.log("Done fetching");
+  const currentHour = new Date().getHours();
+  let obj = {
+    Temp: {},
+  };
+  for (let i = currentHour; i < 24; i++) {
+    obj["Temp"][i] = `${data[i].temp_c}°C`;
+  }
+  console.table(obj);
+}
+
+const input = document.querySelector("input");
+const btn = document.querySelector("button");
+btn.addEventListener("click", (e) => {
+  if (!input.value) return;
+  displayTodayWeather(input.value);
+  displayDaysForecastWeather(input.value);
+  displayHoursForecastWeather(input.value);
+});
+// displayTodayWeather("bandung");
+// displayDaysForecastWeather("bandung");
+// displayHoursForecastWeather("bandung");
