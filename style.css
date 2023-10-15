@@ -40,7 +40,7 @@ main {
 }
 
 .forecast .card {
-  width: 70px;
+  min-width: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,3 +49,6 @@ main {
   border-radius: 0.5rem;
 }
 
+img {
+  width: 30px;
+}
