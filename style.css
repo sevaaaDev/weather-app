@@ -23,6 +23,7 @@ main {
   display: flex;
   align-items: center;
 }
+
 .search img {
   width: 20px;
 }
@@ -31,10 +32,12 @@ main {
   border: none;
   outline: none;
 }
+
 .search button {
   background-color: #fff;
   border: none;
 }
+
 .temperature {
   font-size: 4rem;
   font-weight: bold;
@@ -42,6 +45,7 @@ main {
 
 .bot {
   border-top: 3px solid black;
+  border-bottom: 3px solid black;
   padding: 1rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -50,22 +54,43 @@ main {
 }
 
 .forecast {
-  display: flex;
-  justify-content: space-around;
-  padding: 1rem;
-  gap: 1rem;
+  padding: 0.5rem;
 }
 
 .forecast .card {
-  min-width: 70px;
+  max-width: 90%;
+  margin: auto;
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
-  padding: 0.5rem;
-  border: 1px solid black;
-  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  gap: 1.3rem;
 }
 
-.forecast img {
+.forecast nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+.forecast .prev-hour img {
+  transform: scaleX(-1);
+}
+
+.forecast .dot img {
+  width: 15px;
+}
+
+.hour {
+  margin-right: auto;
+}
+
+.temperature-forecast {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.forecast .card img {
   width: 30px;
 }
