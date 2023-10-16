@@ -14,11 +14,15 @@
 body {
   font-family: "Nunito";
 }
+
 main {
   width: 90%;
   margin: auto;
 }
 
+input {
+  font-family: "Nunito";
+}
 .top {
   display: flex;
   flex-direction: column;
