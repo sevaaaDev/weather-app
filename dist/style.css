@@ -17,6 +17,7 @@ body {
 
 main {
   width: 90%;
+  max-width: 60ch;
   margin: auto;
 }
 
