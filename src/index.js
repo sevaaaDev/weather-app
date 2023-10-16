@@ -47,7 +47,7 @@ async function displayHoursForecastWeather(place) {
 
 const input = document.querySelector("input");
 const btn = document.querySelector("button");
-btn.addEventListener("click", (e) => {
+btn.addEventListener("click", () => {
   if (!input.value) return;
   displayTodayWeather(input.value);
   displayDaysForecastWeather(input.value);
