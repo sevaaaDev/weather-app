@@ -124,3 +124,38 @@ input {
 .forecast .card img {
   width: 30px;
 }
+/* @media (width > 470px) { */
+/*   main { */
+/*     display: grid; */
+/*     grid-template-columns: repeat(3, auto); */
+/*     padding: 1rem 0; */
+/*   } */
+/**/
+/*   .top { */
+/*     grid-column: 1 / 2; */
+/*   } */
+/*   .bot { */
+/*     width: 60%; */
+/*     margin-left: auto; */
+/*     grid-column: 2 /3; */
+/*     border-top: none; */
+/*     border-bottom: none; */
+/*     align-items: center; */
+/*   } */
+/*   .bot div { */
+/*     grid-template-columns: repeat(2, 1fr); */
+/*   } */
+/*   .bot div img { */
+/*     grid-column: 1 /2; */
+/*     grid-row: 1 / 3; */
+/*     width: 40px; */
+/*   } */
+/**/
+/*   .forecast { */
+/*     grid-column: 1 /3; */
+/*   } */
+/**/
+/*   .forecast .card { */
+/*     flex-wrap: wrap; */
+/*   } */
+/* } */
