@@ -19,6 +19,7 @@ main {
   width: 90%;
   max-width: 60ch;
   margin: auto;
+  padding: 2rem 0;
 }
 
 input {
