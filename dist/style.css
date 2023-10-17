@@ -44,6 +44,7 @@ input {
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
+  border-bottom: 3px solid;
 }
 
 .search {
