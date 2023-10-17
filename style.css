@@ -160,3 +160,6 @@ input {
 /*     flex-wrap: wrap; */
 /*   } */
 /* } */
+img {
+  filter: invert(100%);
+}
