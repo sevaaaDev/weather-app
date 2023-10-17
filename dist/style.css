@@ -33,9 +33,11 @@ input {
 }
 
 .search {
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid;
   display: flex;
   align-items: center;
+  width: 50%;
+  margin: auto;
 }
 
 .search img {
@@ -43,6 +45,7 @@ input {
 }
 
 .search input {
+  width: 95%;
   border: none;
   outline: none;
 }
