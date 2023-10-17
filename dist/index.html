@@ -9,22 +9,91 @@
   </head>
   <body>
     <main>
-      <div class="top">
-        <div class="search">
-          <input type="text" name="place" />
-          <button type="button">Search</button>
-        </div>
-        <p>Mostly sunny</p>
-        <img src="icon/weather/64x64/day/116.png" alt="" />
-        <p>36C</p>
+      <div class="search">
+        <input type="text" name="place" placeholder="Search" />
+        <button type="button"><img src="icons/searchm.svg" alt="" /></button>
       </div>
-      <div class="bot">
-        <p>Feels like</p>
-        <p>38C</p>
-        <p>Wind</p>
-        <p>3KPH</p>
-        <p>Humididty</p>
-        <p>40%</p>
+      <div class="data">
+        <div class="top">
+          <p class="description">Mostly sunny</p>
+          <p class="temperature">36*C</p>
+          <p class="location">Bandung, Indonesia</p>
+          <p class="time">Monday, 10 Oct 23 | 12:44</p>
+        </div>
+        <div class="bot">
+          <div class="feels">
+            <img src="icons/feels-like.svg" alt="" />
+            <p>Feels like</p>
+            <p class="feels-value">38C</p>
+          </div>
+          <div class="wind">
+            <img src="icons/wind.svg" alt="" />
+            <p>Wind speed</p>
+            <p class="wind-value">3KPH</p>
+          </div>
+          <div class="humidity">
+            <img src="icons/humidity2.svg" alt="" />
+            <p>Humidity</p>
+            <p class="humidity-value">40%</p>
+          </div>
+          <div class="chance-of-rain">
+            <img src="icons/rainy.svg" alt="" />
+            <p>Chance of rain</p>
+            <p class="chance-rain-value">20%</p>
+          </div>
+        </div>
+      </div>
+      <div class="forecast">
+        <nav>
+          <div class="prev-hour">
+            <img src="icons/arrow-next.svg" alt="" />
+          </div>
+          <div class="dot dot1">
+            <img src="icons/dot-selected.svg" alt="" />
+          </div>
+          <div class="dot dot2">
+            <img src="icons/dot.svg" alt="" />
+          </div>
+          <div class="dot dot3">
+            <img src="icons/dot.svg" alt="" />
+          </div>
+          <div class="dot dot4">
+            <img src="icons/dot.svg" alt="" />
+          </div>
+          <div class="next-hour">
+            <img src="icons/arrow-next.svg" alt="" />
+          </div>
+        </nav>
+        <div class="card">
+          <p class="hour">11:00</p>
+          <p class="temperature-forecast">20*C</p>
+          <img src="icons/rainy.svg" alt="" />
+        </div>
+        <div class="card">
+          <p class="hour">11:00</p>
+          <p class="temperature-forecast">20*C</p>
+          <img src="icons/rainy.svg" alt="" />
+        </div>
+        <div class="card">
+          <p class="hour">11:00</p>
+          <p class="temperature-forecast">20*C</p>
+          <img src="icons/rainy.svg" alt="" />
+        </div>
+        <div class="card">
+          <p class="hour">11:00</p>
+          <p class="temperature-forecast">20*C</p>
+          <img src="icons/rainy.svg" alt="" />
+        </div>
+        <div class="card">
+          <p class="hour">11:00</p>
+          <p class="temperature-forecast">20*C</p>
+          <img src="icons/rainy.svg" alt="" />
+        </div>
+        <div class="card">
+          <p class="hour">11:00</p>
+          <p class="temperature-forecast">20*C</p>
+          <img src="icons/rainy.svg" alt="" />
+        </div>
       </div>
     </main>
   </body>
