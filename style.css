@@ -24,6 +24,13 @@ main {
 input {
   font-family: "Nunito";
 }
+
+.data {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .top {
   display: flex;
   flex-direction: column;
