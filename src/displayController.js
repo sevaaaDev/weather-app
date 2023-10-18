@@ -15,6 +15,18 @@ export async function displayTodayWeather(place) {
   bigTemp.innerText = data.TemperatureC;
   const desc = document.querySelector(".description");
   desc.innerText = data.Condition;
+  const location = document.querySelector(".location");
+  location.innerText = data.Location;
+  const time = document.querySelector(".time");
+  time.innerText = data["Local Time"];
+  const feels = document.querySelector(".feels-value");
+  feels.innerText = data.FeelsC;
+  const wind = document.querySelector(".wind-value");
+  wind.innerText = data.WindKPH;
+  const humidity = document.querySelector(".humidity-value");
+  humidity.innerText = data.Humidity;
+  const chanceRain = document.querySelector(".chance-rain-value");
+  chanceRain.innerText = data.ChanceOfRain;
 }
 
 export async function displayDaysForecastWeather(place) {
