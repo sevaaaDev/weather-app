@@ -47,16 +47,31 @@ export async function displayDaysForecastWeather(place) {
   });
 }
 
-export async function displayHoursForecastWeather(place) {
+export async function displayHoursForecastWeather(place, baseIndex, maxIndex) {
   console.log("Fetching...");
   const data = await getWeather(place);
   console.log("Done fetching");
-  const currentHour = new Date().getHours();
-  let obj = {
-    Temp: {},
-  };
-  for (let i = currentHour; i < 24; i++) {
-    obj["Temp"][i] = `${data[i].temp_c}°C`;
+  const currentHour = data.Time;
+  let arr = [];
+  for (let i = 0; i < 24 - currentHour; i++) {
+    arr[i] = `${Math.floor(data[i + currentHour].temp_c)}°C`;
   }
-  console.table(obj);
+  const container = document.querySelector(".data-forecast");
+  container.innerHTML = "";
+  for (let i = baseIndex; i <= maxIndex; i++) {
+    if (!arr[i]) return;
+    const card = document.createElement("div");
+    card.classList.add("card");
+    const hour = document.createElement("p");
+    hour.classList.add("hour");
+    hour.innerText = `${i + currentHour}:00`;
+    const temperature = document.createElement("p");
+    temperature.classList.add("temperature-forecast");
+    temperature.innerText = arr[i];
+    const icon = document.createElement("img");
+    icon.src = "icons/cloud.svg";
+    card.append(hour, temperature, icon);
+    container.append(card);
+  }
+  console.table(arr);
 }
