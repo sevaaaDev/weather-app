@@ -32,8 +32,8 @@ function filterJson(json) {
   ];
   let forecast = json.forecast;
   let obj = {
-    FeelsC: `${Math.floor(json.feelslike_c)}°C`,
-    FeelsF: `${Math.floor(json.feelslike_f)}°F`,
+    FeelsC: `${Math.floor(json.current.feelslike_c)}°C`,
+    FeelsF: `${Math.floor(json.current.feelslike_f)}°F`,
     Location: `${json.location.name}, ${json.location.country}`,
     Condition: json.current.condition.text,
     "Local Time": format(
