@@ -40,6 +40,7 @@ function filterJson(json) {
       new Date(json.location.localtime),
       "EEEE, d MMM yy | HH:mm",
     ),
+    Time: new Date(json.location.localtime).getHours(),
     TemperatureC: `${Math.floor(json.current.temp_c)}°C`,
     TemperatureF: `${Math.floor(json.current.temp_f)}°F`,
     WindKPH: `${json.current.wind_kph} KpH`,
@@ -72,7 +73,7 @@ function filterJson(json) {
       `${forecast.forecastday[2].day.mintemp_f}°F`,
     ],
   };
-  let currentHour = getHours(new Date());
+  let currentHour = getHours(new Date(json.location.localtime));
   let forecasthour = forecast.forecastday[0].hour;
   for (let i = currentHour; i < forecasthour.length; i++) {
     obj[i] = forecasthour[i];
