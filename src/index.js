@@ -18,7 +18,38 @@ form.addEventListener("submit", (e) => {
 function fetchData(input) {
   if (!input.value) return;
   displayTodayWeather(input.value);
+  displayHoursForecastWeather(input.value, 0, 7);
+  currentPage = 0;
 }
-displayTodayWeather("bandung");
+
+const prevBtn = document.querySelector(".prev-hour");
+const nextBtn = document.querySelector(".next-hour");
+
+nextBtn.addEventListener("click", nextHour);
+prevBtn.addEventListener("click", prevHour);
+
+let currentPage = 0;
+
+function nextHour() {
+  if (currentPage == 2) return;
+  currentPage++;
+  displayHoursForecastWeather(
+    input.value,
+    currentPage * 8,
+    currentPage * 8 + 7,
+  );
+}
+
+function prevHour() {
+  if (currentPage == 0) return;
+  currentPage--;
+  displayHoursForecastWeather(
+    input.value,
+    currentPage * 8,
+    currentPage * 8 + 7,
+  );
+}
+// displayTodayWeather("bandung");
+// displayHoursForecastWeather("bandung", 8, 15);
 // displayDaysForecastWeather("bandung");
 // displayHoursForecastWeather("bandung");
