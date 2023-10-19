@@ -1,4 +1,5 @@
 import { getDay, format, getHours } from "date-fns/esm";
+import { showError } from "./displayController";
 const key = "6104b68df4be4b02b7a52853231010";
 async function fetchWeather(query) {
   try {
@@ -9,6 +10,7 @@ async function fetchWeather(query) {
     const dataJson = await response.json();
     return dataJson;
   } catch (err) {
+    showError(err);
     console.log(err);
     console.log(query);
   }
