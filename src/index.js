@@ -3,6 +3,7 @@ import {
   changePageIndicator,
   displayHoursForecastWeather,
   displayTodayWeather,
+  hideError,
 } from "./displayController";
 import { getWeather } from "./getWeatherData";
 
@@ -25,10 +26,12 @@ let data;
 async function fetchData(input) {
   if (!input.value) return;
   data = await getWeather(input.value);
+  input.value = "";
+  if (!data) return;
+  hideError();
   displayTodayWeather(data);
   displayHoursForecastWeather(data, 0, 5);
   changeBgImg(data);
-  input.value = "";
   currentPage = 0;
 }
 nextBtn.addEventListener("click", () => {
