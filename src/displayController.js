@@ -113,3 +113,20 @@ export function changePageIndicator(currentPage) {
   img.src = "icons/dot-selected.svg";
   console.log(dots, img);
 }
+
+export function changeBgImg(data) {
+  const body = document.querySelector("body");
+  if (data.Condition.includes("rain")) {
+    body.className = "dark-cloudy";
+    return;
+  }
+  if (!data.isDay) {
+    body.className = "night";
+    return;
+  }
+  if (data.Condition.includes("Sunny")) {
+    body.className = "sunny";
+    return;
+  }
+  body.className = "cloudy";
+}
