@@ -1,8 +1,5 @@
 import { getWeather } from "./getWeatherData";
-export async function displayTodayWeather(place) {
-  console.log("Fetching...");
-  const data = await getWeather(place);
-  console.log("Done fetching");
+export async function displayTodayWeather(data) {
   console.table({
     Location: data.Location,
     Condition: data.Condition,
@@ -47,10 +44,7 @@ export async function displayDaysForecastWeather(place) {
   });
 }
 
-export async function displayHoursForecastWeather(place, baseIndex, maxIndex) {
-  console.log("Fetching...");
-  const data = await getWeather(place);
-  console.log("Done fetching");
+export async function displayHoursForecastWeather(data, baseIndex, maxIndex) {
   const currentHour = data.Time;
   let arr = [];
   for (let i = 0; i < 24 - currentHour; i++) {
