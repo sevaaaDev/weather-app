@@ -10,9 +10,11 @@ async function fetchWeather(query) {
     return dataJson;
   } catch (err) {
     console.log(err);
+    console.log(query);
   }
 }
 export async function getWeather(place) {
+  console.log(place);
   const dataJson = await fetchWeather(
     `forecast.json?key=${key}&q=${place}&days=3`,
   );
@@ -34,7 +36,7 @@ function filterJson(json) {
   let obj = {
     FeelsC: `${Math.floor(json.current.feelslike_c)}°C`,
     FeelsF: `${Math.floor(json.current.feelslike_f)}°F`,
-    Location: `${json.location.name}, ${json.location.country}`,
+    Location: `${json.location.name}`, //, ${json.location.country}`,
     Condition: json.current.condition.text,
     "Local Time": format(
       new Date(json.location.localtime),
@@ -78,5 +80,9 @@ function filterJson(json) {
   for (let i = currentHour; i < forecasthour.length; i++) {
     obj[i] = forecasthour[i];
   }
+  for (let i = 0; i < currentHour; i++) {
+    obj[`n${i}`] = forecast.forecastday[1].hour[i];
+  }
+  console.log(obj);
   return obj;
 }
