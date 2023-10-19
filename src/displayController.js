@@ -130,3 +130,14 @@ export function changeBgImg(data) {
   }
   body.className = "cloudy";
 }
+
+export function showError() {
+  const errorWrapper = document.querySelector(".error-wrapper");
+  errorWrapper.classList.add("show");
+  console.log("jsdjf");
+}
+
+export function hideError() {
+  const errorWrapper = document.querySelector(".error-wrapper");
+  errorWrapper.classList.remove("show");
+}
