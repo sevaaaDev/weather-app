@@ -2,6 +2,7 @@ import {
   displayHoursForecastWeather,
   displayTodayWeather,
 } from "./displayController";
+import { getWeather } from "./getWeatherData";
 
 const input = document.querySelector("input");
 const btn = document.querySelector("button");
@@ -15,41 +16,34 @@ form.addEventListener("submit", (e) => {
   fetchData(input);
 });
 
-function fetchData(input) {
-  if (!input.value) return;
-  displayTodayWeather(input.value);
-  displayHoursForecastWeather(input.value, 0, 7);
-  currentPage = 0;
-}
-
 const prevBtn = document.querySelector(".prev-hour");
 const nextBtn = document.querySelector(".next-hour");
+let data;
 
-nextBtn.addEventListener("click", nextHour);
-prevBtn.addEventListener("click", prevHour);
+async function fetchData(input) {
+  if (!input.value) return;
+  data = await getWeather(input.value);
+  displayTodayWeather(data);
+  displayHoursForecastWeather(data, 0, 5);
+  currentPage = 0;
+}
+nextBtn.addEventListener("click", () => {
+  nextHour(data);
+});
+prevBtn.addEventListener("click", () => {
+  prevHour(data);
+});
 
 let currentPage = 0;
 
-function nextHour() {
-  if (currentPage == 2) return;
+function nextHour(data) {
+  if (currentPage == 3) return;
   currentPage++;
-  displayHoursForecastWeather(
-    input.value,
-    currentPage * 8,
-    currentPage * 8 + 7,
-  );
+  displayHoursForecastWeather(data, currentPage * 6, currentPage * 6 + 5);
 }
 
-function prevHour() {
+function prevHour(data) {
   if (currentPage == 0) return;
   currentPage--;
-  displayHoursForecastWeather(
-    input.value,
-    currentPage * 8,
-    currentPage * 8 + 7,
-  );
+  displayHoursForecastWeather(data, currentPage * 6, currentPage * 6 + 5);
 }
-// displayTodayWeather("bandung");
-// displayHoursForecastWeather("bandung", 8, 15);
-// displayDaysForecastWeather("bandung");
-// displayHoursForecastWeather("bandung");
