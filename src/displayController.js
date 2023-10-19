@@ -1,5 +1,5 @@
 import { getWeather } from "./getWeatherData";
-export async function displayTodayWeather(data) {
+export function displayTodayWeather(data) {
   console.table({
     Location: data.Location,
     Condition: data.Condition,
@@ -44,7 +44,7 @@ export async function displayDaysForecastWeather(place) {
   });
 }
 
-export async function displayHoursForecastWeather(data, baseIndex, maxIndex) {
+export function displayHoursForecastWeather(data, baseIndex, maxIndex) {
   const currentHour = data.Time;
   let arr = [];
   for (let i = 0; i < 24; i++) {
@@ -101,4 +101,15 @@ export async function displayHoursForecastWeather(data, baseIndex, maxIndex) {
     container.append(card);
   }
   console.table(arr);
+}
+
+export function changePageIndicator(currentPage) {
+  const dots = document.querySelectorAll(".dot");
+  for (let dot of dots) {
+    const img = dot.querySelector("img");
+    img.src = "icons/dot.svg";
+  }
+  const img = dots[currentPage].querySelector("img");
+  img.src = "icons/dot-selected.svg";
+  console.log(dots, img);
 }
