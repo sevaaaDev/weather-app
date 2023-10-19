@@ -1,4 +1,5 @@
 import {
+  changeBgImg,
   changePageIndicator,
   displayHoursForecastWeather,
   displayTodayWeather,
@@ -26,6 +27,8 @@ async function fetchData(input) {
   data = await getWeather(input.value);
   displayTodayWeather(data);
   displayHoursForecastWeather(data, 0, 5);
+  changeBgImg(data);
+  input.value = "";
   currentPage = 0;
 }
 nextBtn.addEventListener("click", () => {
