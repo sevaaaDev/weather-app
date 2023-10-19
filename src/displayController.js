@@ -47,8 +47,20 @@ export async function displayDaysForecastWeather(place) {
 export async function displayHoursForecastWeather(data, baseIndex, maxIndex) {
   const currentHour = data.Time;
   let arr = [];
-  for (let i = 0; i < 24 - currentHour; i++) {
-    arr[i] = `${Math.floor(data[i + currentHour].temp_c)}°C`;
+  for (let i = 0; i < 24; i++) {
+    if (!data[i + currentHour]) {
+      arr[i] = {
+        temp_c: `${Math.floor(data[`n${i + currentHour - 24}`].temp_c)}°C`,
+        condition: data[`n${i + currentHour - 24}`].condition.text,
+        isDay: data[`n${i + currentHour - 24}`].is_day,
+      };
+      continue;
+    }
+    arr[i] = {
+      temp_c: `${Math.floor(data[i + currentHour].temp_c)}°C`,
+      condition: data[i + currentHour].condition.text,
+      isDay: data[i + currentHour].is_day,
+    };
   }
   const container = document.querySelector(".data-forecast");
   container.innerHTML = "";
@@ -59,11 +71,32 @@ export async function displayHoursForecastWeather(data, baseIndex, maxIndex) {
     const hour = document.createElement("p");
     hour.classList.add("hour");
     hour.innerText = `${i + currentHour}:00`;
+    if (i + currentHour > 24) {
+      hour.innerText = `${i + currentHour - 24}:00`;
+    }
     const temperature = document.createElement("p");
     temperature.classList.add("temperature-forecast");
-    temperature.innerText = arr[i];
+    temperature.innerText = arr[i].temp_c;
     const icon = document.createElement("img");
     icon.src = "icons/cloud.svg";
+    if (arr[i].condition.includes("rain")) {
+      icon.src = "icons/rainy.svg";
+    }
+    if (arr[i].condition.includes("Clear")) {
+      icon.src = "icons/clear-night.svg";
+    }
+    if (arr[i].condition.includes("Sunny")) {
+      icon.src = "icons/sunny.svg";
+    }
+    if (arr[i].condition.includes("Partly")) {
+      icon.src = "icons/partly-cloudy-night.svg";
+    }
+    if (arr[i].condition.includes("Partly") && arr[i].isDay) {
+      icon.src = "icons/partly-cloudy.svg";
+    }
+    if (arr[i].condition.includes("snow")) {
+      icon.src = "icons/snowy.svg";
+    }
     card.append(hour, temperature, icon);
     container.append(card);
   }
