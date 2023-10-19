@@ -37,6 +37,7 @@ function filterJson(json) {
     FeelsC: `${Math.floor(json.current.feelslike_c)}°C`,
     FeelsF: `${Math.floor(json.current.feelslike_f)}°F`,
     Location: `${json.location.name}`, //, ${json.location.country}`,
+    isDay: json.current.is_day,
     Condition: json.current.condition.text,
     "Local Time": format(
       new Date(json.location.localtime),
