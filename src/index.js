@@ -1,4 +1,5 @@
 import {
+  changePageIndicator,
   displayHoursForecastWeather,
   displayTodayWeather,
 } from "./displayController";
@@ -40,10 +41,12 @@ function nextHour(data) {
   if (currentPage == 3) return;
   currentPage++;
   displayHoursForecastWeather(data, currentPage * 6, currentPage * 6 + 5);
+  changePageIndicator(currentPage);
 }
 
 function prevHour(data) {
   if (currentPage == 0) return;
   currentPage--;
   displayHoursForecastWeather(data, currentPage * 6, currentPage * 6 + 5);
+  changePageIndicator(currentPage);
 }
