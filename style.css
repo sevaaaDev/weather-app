@@ -78,12 +78,33 @@ input {
   border-bottom: 3px solid;
 }
 
+.error-text {
+  text-align: center;
+  margin: 2px auto;
+  background-color: #888;
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  width: 50%;
+  min-height: 0;
+}
+
+.error-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 200ms;
+}
+
+.error-wrapper.show {
+  grid-template-rows: 1fr;
+}
+
 .search {
   border-bottom: 3px solid;
   display: flex;
   align-items: center;
   width: 50%;
-  margin: 0 auto 1rem;
+  margin: 0 auto;
 }
 
 .search img {
