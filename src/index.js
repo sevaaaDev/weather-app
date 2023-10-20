@@ -66,6 +66,7 @@ toggle.addEventListener("click", () => {
   } else {
     temp = "C";
   }
+  if (!data) return;
   displayTodayWeather(data, temp);
   displayHoursForecastWeather(data, currentPage * 6, currentPage * 6 + 5, temp);
 });
