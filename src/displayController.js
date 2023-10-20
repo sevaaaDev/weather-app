@@ -1,5 +1,5 @@
 import { getWeather } from "./getWeatherData";
-export function displayTodayWeather(data) {
+export function displayTodayWeather(data, temp = "C") {
   console.table({
     Location: data.Location,
     Condition: data.Condition,
@@ -8,8 +8,13 @@ export function displayTodayWeather(data) {
     Humidity: data.Humidity,
     ChanceOfRain: data.ChanceOfRain,
   });
-  const bigTemp = document.querySelector(".temperature");
-  bigTemp.innerText = data.TemperatureC;
+  const bigTemp = document.querySelector(".main-temp");
+  bigTemp.innerText = data[`Temperature${temp}`];
+  const smallTemp = document.querySelector(".second-temp");
+  smallTemp.innerText = data.TemperatureF;
+  if (temp == "F") {
+    smallTemp.innerText = data.TemperatureC;
+  }
   const desc = document.querySelector(".description");
   desc.innerText = data.Condition;
   const location = document.querySelector(".location");
@@ -20,6 +25,9 @@ export function displayTodayWeather(data) {
   feels.innerText = data.FeelsC;
   const wind = document.querySelector(".wind-value");
   wind.innerText = data.WindKPH;
+  if (temp == "F") {
+    wind.innerText = data.WindMPH;
+  }
   const humidity = document.querySelector(".humidity-value");
   humidity.innerText = data.Humidity;
   const chanceRain = document.querySelector(".chance-rain-value");
@@ -44,20 +52,27 @@ export async function displayDaysForecastWeather(place) {
   });
 }
 
-export function displayHoursForecastWeather(data, baseIndex, maxIndex) {
+export function displayHoursForecastWeather(
+  data,
+  baseIndex,
+  maxIndex,
+  temp = "C",
+) {
   const currentHour = data.Time;
   let arr = [];
   for (let i = 0; i < 24; i++) {
     if (!data[i + currentHour]) {
       arr[i] = {
-        temp_c: `${Math.floor(data[`n${i + currentHour - 24}`].temp_c)}°C`,
+        temp_C: `${Math.floor(data[`n${i + currentHour - 24}`].temp_c)}°C`,
+        temp_F: `${Math.floor(data[`n${i + currentHour - 24}`].temp_f)}°F`,
         condition: data[`n${i + currentHour - 24}`].condition.text,
         isDay: data[`n${i + currentHour - 24}`].is_day,
       };
       continue;
     }
     arr[i] = {
-      temp_c: `${Math.floor(data[i + currentHour].temp_c)}°C`,
+      temp_C: `${Math.floor(data[i + currentHour].temp_c)}°C`,
+      temp_F: `${Math.floor(data[i + currentHour].temp_f)}°F`,
       condition: data[i + currentHour].condition.text,
       isDay: data[i + currentHour].is_day,
     };
@@ -76,7 +91,7 @@ export function displayHoursForecastWeather(data, baseIndex, maxIndex) {
     }
     const temperature = document.createElement("p");
     temperature.classList.add("temperature-forecast");
-    temperature.innerText = arr[i].temp_c;
+    temperature.innerText = arr[i][`temp_${temp}`];
     const icon = document.createElement("img");
     icon.src = "icons/cloud.svg";
     if (arr[i].condition.includes("rain")) {
@@ -143,11 +158,11 @@ export function hideError() {
 }
 
 export function showLoading() {
-  const modal = document.querySelector('.modal')
-  modal.classList.add('show')
+  const modal = document.querySelector(".modal");
+  modal.classList.add("show");
 }
 
 export function hideLoading() {
-  const modal = document.querySelector('.modal')
-  modal.classList.remove('show')
+  const modal = document.querySelector(".modal");
+  modal.classList.remove("show");
 }

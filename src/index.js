@@ -42,17 +42,30 @@ prevBtn.addEventListener("click", () => {
 });
 
 let currentPage = 0;
+let temp = "C";
 
 function nextHour(data) {
   if (currentPage == 3) return;
+  if (!data) return;
   currentPage++;
-  displayHoursForecastWeather(data, currentPage * 6, currentPage * 6 + 5);
+  displayHoursForecastWeather(data, currentPage * 6, currentPage * 6 + 5, temp);
   changePageIndicator(currentPage);
 }
 
 function prevHour(data) {
   if (currentPage == 0) return;
+  if (!data) return;
   currentPage--;
-  displayHoursForecastWeather(data, currentPage * 6, currentPage * 6 + 5);
+  displayHoursForecastWeather(data, currentPage * 6, currentPage * 6 + 5, temp);
   changePageIndicator(currentPage);
 }
+const toggle = document.querySelector(".temperature");
+toggle.addEventListener("click", () => {
+  if (temp == "C") {
+    temp = "F";
+  } else {
+    temp = "C";
+  }
+  displayTodayWeather(data, temp);
+  displayHoursForecastWeather(data, currentPage * 6, currentPage * 6 + 5, temp);
+});
