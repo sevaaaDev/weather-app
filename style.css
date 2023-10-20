@@ -127,6 +127,7 @@ input {
 .temperature {
   font-size: 4rem;
   font-weight: bold;
+  position: relative;
 }
 
 .location {
@@ -217,4 +218,11 @@ img {
 
 .modal {
   display: none;
+}
+
+.second-temp {
+  font-size: 0.9rem;
+  position: absolute;
+  top: 0;
+  right: -30px;
 }
