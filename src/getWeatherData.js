@@ -3,7 +3,9 @@ import { hideLoading, showError, showLoading } from "./displayController";
 const key = "6104b68df4be4b02b7a52853231010";
 async function fetchWeather(query) {
   try {
-    const response = await fetch(`http://api.weatherapi.com/v1/${query}`);
+    const response = await fetch(`http://api.weatherapi.com/v1/${query}`, {
+      mode: "cors",
+    });
     if (!response.ok) {
       throw new Error(response.statusText);
     }
@@ -11,8 +13,6 @@ async function fetchWeather(query) {
     return dataJson;
   } catch (err) {
     showError(err);
-    console.log(err);
-    console.log(query);
   }
 }
 export async function getWeather(place) {
@@ -86,6 +86,5 @@ function filterJson(json) {
   for (let i = 0; i < currentHour; i++) {
     obj[`n${i}`] = forecast.forecastday[1].hour[i];
   }
-  console.log(obj);
   return obj;
 }
