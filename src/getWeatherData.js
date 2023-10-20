@@ -20,8 +20,8 @@ export async function getWeather(place) {
   const dataJson = await fetchWeather(
     `forecast.json?key=${key}&q=${place}&days=3`,
   );
-  if (!dataJson) return;
   hideLoading();
+  if (!dataJson) return;
   return filterJson(dataJson);
 }
 function filterJson(json) {
