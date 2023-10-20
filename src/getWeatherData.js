@@ -3,7 +3,7 @@ import { hideLoading, showError, showLoading } from "./displayController";
 const key = "6104b68df4be4b02b7a52853231010";
 async function fetchWeather(query) {
   try {
-    const response = await fetch(`http://api.weatherapi.com/v1/${query}`, {
+    const response = await fetch(`https://api.weatherapi.com/v1/${query}`, {
       mode: "cors",
     });
     if (!response.ok) {
