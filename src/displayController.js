@@ -141,3 +141,13 @@ export function hideError() {
   const errorWrapper = document.querySelector(".error-wrapper");
   errorWrapper.classList.remove("show");
 }
+
+export function showLoading() {
+  const modal = document.querySelector('.modal')
+  modal.classList.add('show')
+}
+
+export function hideLoading() {
+  const modal = document.querySelector('.modal')
+  modal.classList.remove('show')
+}
