@@ -1,13 +1,5 @@
 import { getWeather } from "./getWeatherData";
 export function displayTodayWeather(data, temp = "C") {
-  console.table({
-    Location: data.Location,
-    Condition: data.Condition,
-    "Local Time": data["Local Time"],
-    Temperature: data.TemperatureC,
-    Humidity: data.Humidity,
-    ChanceOfRain: data.ChanceOfRain,
-  });
   const bigTemp = document.querySelector(".main-temp");
   bigTemp.innerText = data[`Temperature${temp}`];
   const smallTemp = document.querySelector(".second-temp");
@@ -35,21 +27,7 @@ export function displayTodayWeather(data, temp = "C") {
 }
 
 export async function displayDaysForecastWeather(place) {
-  console.log("Fetching...");
   const data = await getWeather(place);
-  console.log("Done fetching");
-  console.table({
-    "Max Temperature": {
-      [data.forecastDay[0]]: data.maxTempC[0],
-      [data.forecastDay[1]]: data.maxTempC[1],
-      [data.forecastDay[2]]: data.maxTempC[2],
-    },
-    "Min Temperature": {
-      [data.forecastDay[0]]: data.minTempC[0],
-      [data.forecastDay[1]]: data.minTempC[1],
-      [data.forecastDay[2]]: data.minTempC[2],
-    },
-  });
 }
 
 export function displayHoursForecastWeather(
@@ -115,7 +93,6 @@ export function displayHoursForecastWeather(
     card.append(hour, temperature, icon);
     container.append(card);
   }
-  console.table(arr);
 }
 
 export function changePageIndicator(currentPage) {
@@ -126,7 +103,6 @@ export function changePageIndicator(currentPage) {
   }
   const img = dots[currentPage].querySelector("img");
   img.src = "icons/dot-selected.svg";
-  console.log(dots, img);
 }
 
 export function changeBgImg(data) {
@@ -149,7 +125,6 @@ export function changeBgImg(data) {
 export function showError() {
   const errorWrapper = document.querySelector(".error-wrapper");
   errorWrapper.classList.add("show");
-  console.log("jsdjf");
 }
 
 export function hideError() {
