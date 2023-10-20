@@ -22,7 +22,7 @@ export function displayTodayWeather(data, temp = "C") {
   const time = document.querySelector(".time");
   time.innerText = data["Local Time"];
   const feels = document.querySelector(".feels-value");
-  feels.innerText = data.FeelsC;
+  feels.innerText = data[`Feels${temp}`];
   const wind = document.querySelector(".wind-value");
   wind.innerText = data.WindKPH;
   if (temp == "F") {
